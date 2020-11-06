@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
+import styled from "styled-components";
+import img from "./images/rm-bg.jpg";
+
 
 import Character from "./components/Character";
 
@@ -15,7 +18,7 @@ const App = () => {
 
   const [characters, setCharacters] = useState([]);
   const fetchCharacters = () => {
-    axios.get("https://swapi.dev/api/people/")
+    axios.get("https://rickandmortyapi.com/api/character/")
       .then((res) => {
         setCharacters(res.data.results);
         console.log(res.data);
@@ -33,15 +36,35 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1 className="Header">Characters</h1>
+      <StyledContainer>
       {
         characters.map((item) => {
-          count++;
-          return <Character key={count} details={item} />;
+          if (count < 5){
+            count++;
+            return <Character key={item.id} details={item} />;
+          }
+          return null;
         })
       }
+      </StyledContainer>
     </div>
   );
 }
 
 export default App;
+
+const StyledContainer = styled.div`
+    background-image: url(${img});
+    /* background-image: linear-gradient(60deg, #29323c 0%, #485563 100%); */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    border: 1px solid black;
+    height: 100vh;
+    /* position: fixed; */
+    /* width: 100vh; */
+
+`;
