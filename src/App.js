@@ -8,14 +8,6 @@ import img from "./images/rm-bg.jpg";
 import Character from "./components/Character";
 
 const App = () => {
-  // Try to think through what state you'll need for this app before starting. Then build out
-  // the state properties here.
-  // const [character, setCharacter] = useState("");
-
-  // Fetch characters from the API in an effect hook. Remember, anytime you have a 
-  // side effect in a component, you want to think about which state and/or props it should
-  // sync up with, if any.
-
   const [characters, setCharacters] = useState([]);
   const fetchCharacters = () => {
     axios.get("https://rickandmortyapi.com/api/character/")
@@ -27,13 +19,11 @@ const App = () => {
         debugger;
       });
   };
-
   useEffect(() => {
     fetchCharacters();
   }, []);
 
   let count = 0;
-
   return (
     <div className="App">
       <StyledContainer>
@@ -55,7 +45,6 @@ export default App;
 
 const StyledContainer = styled.div`
     background-image: url(${img});
-    /* background-image: linear-gradient(60deg, #29323c 0%, #485563 100%); */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -64,7 +53,4 @@ const StyledContainer = styled.div`
     padding: 0;
     border: 1px solid black;
     height: 100vh;
-    /* position: fixed; */
-    /* width: 100vh; */
-
 `;
